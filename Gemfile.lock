@@ -5,7 +5,6 @@ GEM
     rack (1.4.4)
     rack-protection (1.3.2)
       rack
-    rest-open-uri (1.0.0)
     sinatra (1.3.3)
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
@@ -17,5 +16,4 @@ PLATFORMS
 
 DEPENDENCIES
   json
-  rest-open-uri
   sinatra

@@ -1,0 +1,69 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Намба. <%= @photos['param']['album']['title'] %></title>
+  <meta name="description" content="An very basic example of how to use the Wookmark jQuery plug-in.">
+  <meta name="author" content="Christoph Ono">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <link href='http://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/reset.css">
+  <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body style="font-family: 'Lobster', cursive;">
+
+<div id="container">
+  <header>
+    <h1>Фотографии с Намбы</h1>
+    <p><%= @photos['param']['album']['title'] %></p>
+  </header>
+  <div id="main" role="main">
+
+    <ul id="tiles">
+      <!-- These are our grid blocks -->
+      <% @photos['elements'].each do |element|  %>
+        <li><a href="http://namba.kg/#!/photo/<%= element['id']%>"><img border="0" width="300" src="<%= element['big_preview'] %>"></a></li>
+      <% end %>
+      <!-- End of grid blocks -->
+    </ul>
+
+  </div>
+  <footer>
+
+  </footer>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="https://raw.github.com/GBKS/Wookmark-jQuery/master/jquery.wookmark.min.js"></script>
+<script src="https://raw.github.com/desandro/imagesloaded/master/jquery.imagesloaded.js"></script>
+
+<!-- Once the images are loaded, initalize the Wookmark plug-in. -->
+<script type="text/javascript">
+  $('#tiles').imagesLoaded(function() {
+    // Prepare layout options.
+    var options = {
+      autoResize: true, // This will auto-update the layout when the browser window is resized.
+      container: $('#main'), // Optional, used for some extra CSS styling
+      offset: 5, // Optional, the distance between grid items
+      itemWidth: 310 // Optional, the width of a grid item
+    };
+
+    // Get a reference to your grid items.
+    var handler = $('#tiles li');
+    // Call the layout function.
+    handler.wookmark(options);
+  });
+</script>
+
+</body>
+</html>

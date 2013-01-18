@@ -3,7 +3,7 @@
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
+<html lang="en" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -21,6 +21,7 @@
     <p><%= @photos['param']['album']['title'] %></p>
   </header>
   <div id="main" role="main">
+    <div style="text-align: center;"><progress id="progress-bar" style="display: none;"></progress></div>
     <ul id="tiles">
       <% @photos['elements'].each do |element|  %>
         <li><a href="http://namba.kg/#!/photo/<%= element['id']%>"><img border="0" width="300" src="<%= element['big_preview'] %>"></a></li>
@@ -38,7 +39,7 @@
 
 <!-- Once the images are loaded, initalize the Wookmark plug-in. -->
 <script type="text/javascript">
-  $('#tiles').imagesLoaded(function() {
+  var imalo = $('#tiles').imagesLoaded(function($images, $proper, $broken) {
     // Prepare layout options.
     var options = {
       autoResize: true, // This will auto-update the layout when the browser window is resized.
@@ -47,10 +48,28 @@
       itemWidth: 310 // Optional, the width of a grid item
     };
 
+    x = 1;
+
+    $images.each( function() {
+      var $this = $(this).css({ left: x });
+      x += $this.width() + 1;
+    });
+
     // Get a reference to your grid items.
     var handler = $('#tiles li');
     // Call the layout function.
     handler.wookmark(options);
+  });
+
+  imalo.progress( function( isBroken, $images, $proper, $broken ){
+    if ($proper.length + $broken.length == $images.length) {
+      $("#progress-bar").hide();
+    } else {
+      $("#progress-bar").show();
+      $("#progress-bar").attr("value", $proper.length + $broken.length);
+      $("#progress-bar").attr("max",   $images.length);
+    }
+    console.log( 'Loading progress: ' + ( $proper.length + $broken.length ) + ' out of ' + $images.length );
   });
 </script>
 

@@ -81,12 +81,15 @@
    */
   var onScrollFunction = function onScroll() {
     var closeToBottom = ($(window).scrollTop() + $(window).height() > $(document).height() - 300);
-    if (closeToBottom) {
+    if (closeToBottom && page) {
       var items = $('#tiles li');
 
       $.getJSON('/<%= @id %>/' + page, function(data) {
         var items = [];
-
+        if (data == null) {
+          page = null;
+          return;
+        }
         $.each(data, function(key, val) {
           var li = document.createElement('li');
           li.innerHTML = '<a href="http://namba.kg/#!/photo/'+val.id+'"><img width="300" src="' + val.big_preview + '"></a>';

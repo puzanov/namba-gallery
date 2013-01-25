@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Намба. <%= @photos['param']['album']['title'] %></title>
+  <title>Намба. <% unless @main %><%= @photos['param']['album']['title'] %><% end %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="/reset.css">
   <link rel="stylesheet" href="/style.css">
@@ -21,13 +21,20 @@
 
 <div id="container">
   <header>
-    <h1><a href="http://namba.kg"><img src="/namba.png"></a></h1>
-    <p><%= @photos['param']['album']['title'] %></p>
+    <h1><a href="/"><img src="/namba.png"></a></h1>
+    <p><% unless @main %><%= @photos['param']['album']['title'] %><% end %></p>
   </header>
   <div id="main" role="main">
     <ul id="tiles">
-      <% @photos['elements'].each do |element|  %>
-        <li><a href="http://namba.kg/#!/photo/<%= element['id']%>"><img border="0" width="300" src="<%= element['big_preview'] %>"></a></li>
+
+      <% if @main %>
+        <% @photos['albums'].each do |album|  %>
+          <li><a href="/album/<%= album['id']%>"><img border="0" width="300" src="<%= album['big_cover'] %>"></a></li>
+        <% end %>
+      <% else %>
+        <% @photos['elements'].each do |element|  %>
+          <li><a href="http://namba.kg/#!/photo/<%= element['id']%>"><img border="0" width="300" src="<%= element['big_preview'] %>"></a></li>
+        <% end %>
       <% end %>
     </ul>
   </div>
@@ -81,10 +88,10 @@
    */
   var onScrollFunction = function onScroll() {
     var closeToBottom = ($(window).scrollTop() + $(window).height() > $(document).height() - 300);
-    if (closeToBottom && page) {
+    if (closeToBottom && page && !$("#progress-bar").is(':visible')) {
       var items = $('#tiles li');
 
-      $.getJSON('/<%= @id %>/' + page, function(data) {
+      $.getJSON('<% unless @main %>/album/<%= @id %><% end %>/' + page, function(data) {
         var items = [];
         if (data == null) {
           page = null;
@@ -92,7 +99,11 @@
         }
         $.each(data, function(key, val) {
           var li = document.createElement('li');
-          li.innerHTML = '<a href="http://namba.kg/#!/photo/'+val.id+'"><img width="300" src="' + val.big_preview + '"></a>';
+          <% if @main %>
+            li.innerHTML = '<a href="/album/'+val.id+'"><img width="300" src="' + val.big_cover + '"></a>';
+          <% else %>
+            li.innerHTML = '<a href="http://namba.kg/#!/photo/'+val.id+'"><img width="300" src="' + val.big_preview + '"></a>';
+          <% end %>
           items.push(li);
         });
 

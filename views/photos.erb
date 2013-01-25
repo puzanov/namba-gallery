@@ -22,7 +22,7 @@
 <div id="container">
   <header>
     <h1><a href="/"><img src="/namba.png"></a></h1>
-    <p><% unless @main %><%= @photos['param']['album']['title'] %><% end %></p>
+    <p><% unless @main %><%= @photos['param']['album']['title'] %><% else %>Лучшие фото альбомы пользователей <a href="http://namba.kg">namba.kg</a><% end %></p>
   </header>
   <div id="main" role="main">
     <ul id="tiles">

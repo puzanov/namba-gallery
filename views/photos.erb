@@ -20,6 +20,79 @@
 <body style="font-family: 'Lobster', cursive;">
 
 <div id="container">
+  <script>
+    function gaSSDSLoad (acct, domain) {
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."),
+          pageTracker,
+          s;
+      s = document.createElement('script');
+      s.src = gaJsHost + 'google-analytics.com/ga.js';
+      s.type = 'text/javascript';
+      s.onloadDone = false;
+      function init () {
+        if (_gat != 'undefined') {
+          pageTracker = _gat._getTracker(acct);
+          pageTracker._trackPageview();
+          pageTracker._setDomainName(domain);
+        }
+      }
+      s.onload = function () {
+        s.onloadDone = true;
+        init();
+      };
+      s.onreadystatechange = function() {
+        if (('loaded' === s.readyState || 'complete' === s.readyState) && !s.onloadDone) {
+          s.onloadDone = true;
+          init();
+        }
+      };
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  </script>
+
+  <script type="text/javascript">
+    var __GA_UA__ = 'UA-11186328-2';
+    window.onload = function () { gaSSDSLoad("UA-11186328-2", ".namba.kg"); };
+  </script>
+  <!-- Yandex.Metrika counter -->
+  <div style="display:none;"><script type="text/javascript">
+    (function(w, c) {
+      (w[c] = w[c] || []).push(function() {
+        try {
+          w.yaCounter5249776 = new Ya.Metrika(5249776);
+          yaCounter5249776.clickmap(true);
+          yaCounter5249776.trackLinks(true);
+
+        } catch(e) { }
+      });
+    })(window, 'yandex_metrika_callbacks');
+  </script></div>
+  <script src="http://mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+  <noscript><div><img src="http://mc.yandex.ru/watch/5249776" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <!-- WWW.NET.KG , code for http://namba.kg -->
+  <div style="text-align: right;">
+  <a href="http://www.net.kg/">
+    <script language="javascript">
+      java="1.0";
+      java1=""+"refer="+escape(document.referrer)+"&page="+
+          escape(window.location.href);
+      document.cookie="astratop=1; path=/"; java1+="&c="+(document.cookie?"yes":"now");
+    </script>
+    <script language="javascript1.1">java="1.1";java1+="&java="+(navigator.javaEnabled()?"yes":"now")</script>
+    <script language="javascript1.2">java="1.2";
+    java1+="&razresh="+screen.width+'x'+screen.height+"&cvet="+
+        (((navigator.appName.substring(0,3)=="Mic"))?
+            screen.colorDepth:screen.pixelDepth)</script><script language="javascript1.3">java="1.3"</script>
+    <script language="javascript">java1+="&jscript="+java+"&rand="+Math.random();
+    document.write("<a href='http://www.net.kg/?fromsite=239' target='_blank'><img "+
+        " src='http://www.net.kg/img.php?id=239&"+java1+"&' border=0 alt='WWW.NET.KG' width='21' height='16'></a>")</script>
+
+    <noscript><a href=http://www.net.kg/?fromsite=239 target=_blank><img src="http://www.net.kg/img.php?id=239" border=0 alt="WWW.NET.KG" width='21' height='16'></a></noscript>
+  </a>
+  </div>
+  <!-- /WWW.NET.KG -->
+
   <header>
     <h1><a href="/"><img src="/namba.png"></a></h1>
     <p><% unless @main %><%= @photos['param']['album']['title'] %><% else %>Лучшие фотоальбомы пользователей <a href="http://namba.kg">namba.kg</a><% end %></p>

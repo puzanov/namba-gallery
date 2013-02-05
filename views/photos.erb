@@ -95,7 +95,7 @@
 
   <header>
     <h1><a href="/"><img src="/namba.png"></a></h1>
-    <p><% unless @main %><%= @photos['param']['album']['title'] %><% else %>Лучшие фотоальбомы пользователей <a href="http://namba.kg">namba.kg</a><% end %></p>
+    <p><% unless @main %><a href="http://namba.kg/#!/photo/album/<%= @photos['param']['id'] %>/"><%= @photos['param']['album']['title'] %></a><% else %>Лучшие фотоальбомы пользователей <a href="http://namba.kg">namba.kg</a><% end %></p>
   </header>
   <div id="main" role="main">
     <ul id="tiles">

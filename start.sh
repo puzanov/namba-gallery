@@ -1,3 +1,3 @@
 #!/bin/sh
 pkill -9 -f "gallery"
-nohup ruby gallery.rb >> /tmp/sinatra.log 2>&1 &
+nohup ruby gallery.rb >> /tmp/gallery.log 2>&1 &

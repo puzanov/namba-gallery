@@ -26,7 +26,7 @@ get '/album/:id/:page' do |id, page|
   @photos['elements'].to_json
 end
 
-get '/album/:id' do |id|
+get '/album/:id/?' do |id|
   @main = false
   @id = id
   @photos = JSON.parse(open("http://namba.kg/api/?service=photo&action=elements_list&type=album&limit=25&param=#{id}").read)
